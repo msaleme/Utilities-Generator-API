@@ -1,0 +1,11 @@
+{
+  "version": "1.0.0",
+  "apiVersion": "v1",
+  "descriptorVersion": "1.0.0",
+  "classifier": "raml",
+  "main": "utilities-generator-api.raml",
+  "assetId": "utilities-generator-api",
+  "groupId": "7e6f8241-36d8-45cf-abb7-2048a629ae51",
+  "organizationId": "7e6f8241-36d8-45cf-abb7-2048a629ae51",
+  "name": "Utilities Generator API"
+}

@@ -1,0 +1,146 @@
+#%RAML 1.0
+title: Utilities Generator API
+version: v1
+
+types:
+  MeterReading:
+    properties:
+      timestamp: string
+      value: number
+
+  PowerConsumption:
+    properties:
+      timestamp: string
+      consumption: number
+
+  OutageData:
+    properties:
+      start_time: string
+      end_time: string
+      duration: string
+
+  FaultEvent:
+    properties:
+      timestamp: string
+      type: string
+      severity: string
+
+/utilities:
+  /generate:
+    /meter-readings:
+      get:
+        description: Generate simulated meter readings for a given period
+        queryParameters:
+          start_date:
+            description: Start date for the meter readings (e.g., "2024-01-01")
+            type: string
+            required: true
+          end_date:
+            description: End date for the meter readings (e.g., "2024-01-31")
+            type: string
+            required: true
+          meter_id:
+            description: Identifier for the meter
+            type: string
+            required: true
+        responses:
+          200:
+            body:
+              application/json:
+                example: |
+                  {
+                    "meter_id": "123456",
+                    "readings": [
+                      {"timestamp": "2024-01-01T00:00:00", "value": 100.5},
+                      {"timestamp": "2024-01-02T00:00:00", "value": 101.2}
+                    ]
+                  }
+
+    /power-consumption:
+      get:
+        description: Generate simulated power consumption data for a given period
+        queryParameters:
+          start_date:
+            description: Start date for power consumption data (e.g., "2024-01-01")
+            type: string
+            required: true
+          end_date:
+            description: End date for power consumption data (e.g., "2024-01-31")
+            type: string
+            required: true
+          interval:
+            description: Interval for data points (e.g., "hourly", "daily")
+            type: string
+            enum: [hourly, daily]
+            required: true
+          location:
+            description: Location ID for the power consumption data
+            type: string
+        responses:
+          200:
+            body:
+              application/json:
+                example: |
+                  {
+                    "location": "Houston",
+                    "data": [
+                      {"timestamp": "2024-01-01T00:00:00", "consumption": 500},
+                      {"timestamp": "2024-01-01T01:00:00", "consumption": 520}
+                    ]
+                  }
+
+    /outage-data:
+      get:
+        description: Generate simulated outage data for a given period
+        queryParameters:
+          start_date:
+            description: Start date for outage data (e.g., "2024-01-01")
+            type: string
+            required: true
+          end_date:
+            description: End date for outage data (e.g., "2024-01-31")
+            type: string
+            required: true
+          location:
+            description: Location ID for outage data
+            type: string
+        responses:
+          200:
+            body:
+              application/json:
+                example: |
+                  {
+                    "location": "Dallas",
+                    "outages": [
+                      {"start_time": "2024-01-05T10:00:00", "end_time": "2024-01-05T14:00:00", "duration": "4 hours"},
+                      {"start_time": "2024-01-12T08:30:00", "end_time": "2024-01-12T11:45:00", "duration": "3 hours 15 minutes"}
+                    ]
+                  }
+
+    /fault-events:
+      get:
+        description: Generate simulated fault events data for a given period
+        queryParameters:
+          start_date:
+            description: Start date for fault events data (e.g., "2024-01-01")
+            type: string
+            required: true
+          end_date:
+            description: End date for fault events data (e.g., "2024-01-31")
+            type: string
+            required: true
+          location:
+            description: Location ID for fault events data
+            type: string
+        responses:
+          200:
+            body:
+              application/json:
+                example: |
+                  {
+                    "location": "Austin",
+                    "fault_events": [
+                      {"timestamp": "2024-01-03T12:45:00", "type": "Equipment Failure", "severity": "Major"},
+                      {"timestamp": "2024-01-15T08:20:00", "type": "Power Surge", "severity": "Minor"}
+                    ]
+                  }
